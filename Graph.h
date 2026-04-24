@@ -9,7 +9,7 @@ class Graph {
     private:
         int numVertices;
         int numEdges;
-        int adjMatrix[1000][1000];
+        int** adjMatrix;
         Vertex vertices[1000];
         int oddNodes[1000];
         int oddCount;

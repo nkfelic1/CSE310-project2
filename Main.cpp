@@ -1,4 +1,5 @@
 #include "Edge.h"
+#include "Graph.h"
 #include <iostream>
 
 int main(){
@@ -8,14 +9,12 @@ int main(){
     int numOfVertices;
     int numOfEdges;
 
-    if(!std::cin.eof()){
-        std::cin >> numOfVertices;
-        std::cin >> numOfEdges;
+    if(!(std::cin >> numOfVertices >> numOfEdges)) {
+        std::cout << "Input not found!" << std::endl;
+        return 1;
     }
-    else{
-        std::cout<<"Input not found!"<<std::endl;
-        return NULL;
-    }
+
+    Graph* g = new Graph(numOfVertices, numOfEdges);
 
     while(!std::cin.eof()){
         int startVertice;
@@ -26,10 +25,12 @@ int main(){
         std::cin >> weight;
         Edge* newEdge = new Edge(startVertice, endVertice);
         newEdge->setWeight(weight);
-        // Here is where you load up the Graph object
+        // Here is where you load up the Graph object   
+        g->addEdge(startVertice, endVertice, weight);
     }
 
     // And here is where you start working on the three tasks
+    g->printAdjMatrix();
 
     return 0;
 }
