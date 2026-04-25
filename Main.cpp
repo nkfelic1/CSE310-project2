@@ -31,6 +31,8 @@ int main(){
 
     // And here is where you start working on the three tasks
     g->printAdjMatrix();
+    std::cout << std::endl;
+    g->printOddDegreeNodes();
 
     return 0;
 }
