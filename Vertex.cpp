@@ -1,10 +1,12 @@
 #include "Vertex.h"
+#include <climits>
 
 Vertex::Vertex(){
     this->index = -1;
-    this->degree = -1;
-    this->distance = 1000;
+    this->degree = 0;
+    this->distance = INT_MAX;
     this->previous = nullptr;
+    this->visited = false;
 }
 
 int Vertex::getIndex(){
