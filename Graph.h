@@ -20,6 +20,8 @@ class Graph {
         void printAdjMatrix();                 // print matrix
         void printOddDegreeNodes();            // print odd degree nodes
         void dijkstra(int source);             // dijkstra
+        int* getOddNodes();
+        int getOddCount();
 };
 
 #endif

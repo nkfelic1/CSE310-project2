@@ -33,6 +33,12 @@ int main(){
     g->printAdjMatrix();
     std::cout << std::endl;
     g->printOddDegreeNodes();
+    // task 3
+    int oddNum = g->getOddCount();
+    int* oddVertices = g->getOddNodes();
+    for (int i = 0; i < oddNum; i++) {
+        g->dijkstra(oddVertices[i]);
+    }
 
     return 0;
 }

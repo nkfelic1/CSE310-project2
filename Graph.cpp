@@ -59,9 +59,67 @@ void Graph::printOddDegreeNodes() {
     for (int i = 0; i < oddCount; i++) {
         cout << oddNodes[i] << " ";
     }
-    cout << "}" << endl;
+    cout << "}\n" << endl;
+}
+
+int* Graph::getOddNodes() {
+    return oddNodes;
+}
+
+int Graph::getOddCount() {
+    return oddCount;
 }
 
 void Graph::dijkstra(int source) {
+    int dist[numVertices + 1];
+    int prev[numVertices + 1];
+    int visited[numVertices + 1];
+
+    for (int i = 1; i <= numVertices; i++) {
+        if (i == source) {
+            dist[i] = 0;
+        } else {
+            dist[i] = INT_MAX;
+        }
+        prev[i] = -1;
+        visited[i] = 0;
+    }
+
+    for (int i = 0; i < numVertices; i++) {
+        int u = -1;
+        for (int j = 1; j <= numVertices; j++) {
+            if (!visited[j] && (u == -1 || dist[j] < dist[u])) {
+                u = j;
+            }
+        }
+
+        if (u == -1 || dist[u] == INT_MAX) {
+            break;
+        }
+
+        visited[u] = 1;
+
+        for (int v = 1; v <= numVertices; v++) {
+            if (adjMatrix[u][v] != 0 && !visited[v]) {
+                int newDist = dist[u] + adjMatrix[u][v];
+                if (newDist < dist[v]) {
+                    dist[v] = newDist;
+                    prev[v] = u;
+                }
+            }
+        }
+    }
+
+    for (int i = 1; i <= numVertices; i++) {
+        vertices[i - 1].setDistance(dist[i]);
+        if (prev[i] != -1) {
+            vertices[i - 1].setPrevious(&vertices[prev[i] - 1]);
+        }
+    }
+
     cout << "The shortest path lengths from Node " << source << " to all other nodes are:" << endl;
+    for (int i = 1; i <= numVertices; i++) {
+        cout << i << ": " << dist[i] << endl;
+    }
+    cout << "\n";
 }
